@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{926A6675-451B-FD40-1002-FE845309141A}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "ProjectGwen",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
