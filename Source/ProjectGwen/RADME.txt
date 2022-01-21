@@ -9,6 +9,9 @@ Inside each folder of importance will be a README.txt file explaining the purpos
 usage, and structure of everything within said folder for documentation.  Feedback
 and edits is always welcome.  Github will show who gets credit for what anyway.
 
+Take a look inside GAME_LIMITS.h to get an idea of our expected runtime limitations
+and general related notes.
+
 Programming/blueprint questions can be asked in Tech-Support or Engineering
 and I (Koi) am more than willing to give one on one attention to anyone who wants
 or needs it.
