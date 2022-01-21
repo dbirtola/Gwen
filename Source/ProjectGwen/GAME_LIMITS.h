@@ -8,6 +8,9 @@ Target hardware:
 * Disk = unknown
 * NetworkBandwidth = unknown
 
+Expectations:
+Only one World object is in use at a time.
+
 TODO:
 * Come up with memory and ms budgets for different various systems
 */
@@ -18,6 +21,8 @@ TODO:
 namespace GAME_LIMITS {
 	static constexpr uint32_t MAX_STATIC_ACTOR_COUNT = 8000; //Actors without movable bodies and tick
 	static constexpr uint32_t MAX_DYNAMIC_ACTOR_COUNT = 200; //Actors with movable bodies and/or tick
+	static constexpr uint32_t MAX_ACTOR_COUNT = MAX_STATIC_ACTOR_COUNT+MAX_DYNAMIC_ACTOR_COUNT;
+	static constexpr uint32_t MAX_ACTOR_TYPES = 128;
 	static constexpr uint32_t MAX_DYNAMIC_LIGHT_COUNT = 32;  //May change
 	static constexpr uint32_t MAX_STATIONARY_LIGHT_COUNT = 0;  //Till we have a HISM manager
 	static constexpr uint32_t MAX_POLIES_IN_VIEW = 100000;  //Very likely to change

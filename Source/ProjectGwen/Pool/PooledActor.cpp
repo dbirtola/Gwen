@@ -3,3 +3,4 @@
 
 #include "PooledActor.h"
 
+TMap<FName, FlatBuffer<APooledActor*, GAME_LIMITS::MAX_ACTOR_COUNT>> APooledActor::pooledActors = {};

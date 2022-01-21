@@ -146,7 +146,7 @@ public:
 #include <iostream>
 
 #ifdef TESTING
-std::string T_FlatFlaggedBufferInitialize() {
+static std::string T_FlatFlaggedBufferInitialize() {
 	FlatFlaggedBuffer<uint32_t, 10> ffb;
 	for (uint32_t i = 10; i > 0; i--) {
 		ffb.insert(i);
@@ -173,7 +173,7 @@ std::string T_FlatFlaggedBufferInitialize() {
 	}
 	return "";
 }
-std::string T_FlatFlaggedBufferBigInitialize() {
+static std::string T_FlatFlaggedBufferBigInitialize() {
 	constexpr uint32_t max = 100000;
 	static FlatFlaggedBuffer<uint32_t, max> ffb;
 	for (uint32_t i = 0; i < max; i++) {
@@ -192,7 +192,7 @@ std::string T_FlatFlaggedBufferBigInitialize() {
 	return "";
 }
 #endif
-void testFlatFlaggedBuffer() {
+static void testFlatFlaggedBuffer() {
 #ifdef TESTING
 	std::string dbgStr = "";
 	dbgStr = T_FlatFlaggedBufferInitialize();
