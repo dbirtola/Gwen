@@ -13,25 +13,29 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 	{
 		AEnemyBase* Enemy = Cast<AEnemyBase>(GetWorld()->SpawnActor(EnemyData->BaseClass, &SpawnTransform));
 
-		if(EnemyData->MeshOverride)
+		if(Enemy)
 		{
-			Enemy->GetMesh()->SetSkeletalMesh(EnemyData->MeshOverride);
-		}
-
-		if(EnemyData->AnimBPOverride)
-		{
-			Enemy->GetMesh()->SetAnimClass(EnemyData->AnimBPOverride);
-		}
-
-		if(UAbilitySystemComponent* ASC = Enemy->GetAbilitySystemComponent())
-		{
-			for(UGameplayEffect* Effect : EnemyData->EnemyEffects)
+			
+			if(EnemyData->MeshOverride)
 			{
-				FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
-				ASC->ApplyGameplayEffectToSelf(Effect, 1, Context);
+				Enemy->GetMesh()->SetSkeletalMesh(EnemyData->MeshOverride);
 			}
+
+			if(EnemyData->AnimBPOverride)
+			{
+				Enemy->GetMesh()->SetAnimClass(EnemyData->AnimBPOverride);
+			}
+
+			if(UAbilitySystemComponent* ASC = Enemy->GetAbilitySystemComponent())
+			{
+				for(UGameplayEffect* Effect : EnemyData->EnemyEffects)
+				{
+					FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
+					ASC->ApplyGameplayEffectToSelf(Effect, 1, Context);
+				}
+			}
+			// TODO: On hit effects
 		}
 
-		// TODO: On hit effects
 	}
 }

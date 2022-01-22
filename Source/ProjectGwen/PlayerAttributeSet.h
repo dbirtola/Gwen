@@ -24,15 +24,16 @@ class PROJECTGWEN_API UPlayerAttributeSet : public UAttributeSet
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	FGameplayAttributeData CurrentHealth = 10;
+	FGameplayAttributeData CurrentHealth = 100;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CurrentHealth)
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	FGameplayAttributeData MaximumHealth = 10;
+	FGameplayAttributeData MaximumHealth = 100;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaximumHealth)
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
 	FGameplayAttributeData CurrentSpeed = 1;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CurrentSpeed)
 
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data) override;
 };
