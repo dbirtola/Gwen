@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "ProjectGwenCharacter.generated.h"
 
 UCLASS(config=Game)
-class AProjectGwenCharacter : public ACharacter
+class AProjectGwenCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -18,6 +19,9 @@ class AProjectGwenCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	UAbilitySystemComponent* AbilitySystemComponent;
 public:
 	AProjectGwenCharacter();
 
@@ -68,5 +72,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 
