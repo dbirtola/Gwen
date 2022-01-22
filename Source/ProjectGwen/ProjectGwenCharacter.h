@@ -3,13 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GwenCharacterBase.h"
 #include "GameFramework/Character.h"
-#include "AbilitySystemInterface.h"
-#include "PlayerAttributeSet.h"
 #include "ProjectGwenCharacter.generated.h"
 
 UCLASS(config=Game)
-class AProjectGwenCharacter : public ACharacter, public IAbilitySystemInterface
+class AProjectGwenCharacter : public AGwenCharacterBase
 {
 	GENERATED_BODY()
 
@@ -31,11 +30,6 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
-
-	UPlayerAttributeSet* PlayerAttributeSet;
-	
-	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
 
 protected:
 
@@ -79,6 +73,5 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 

@@ -32,7 +32,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, MaximumHealth)
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
-	FGameplayAttributeData CurrentSpeed = 1;
+	FGameplayAttributeData CurrentSpeed = 600;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CurrentSpeed)
 
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData &Data) override;
