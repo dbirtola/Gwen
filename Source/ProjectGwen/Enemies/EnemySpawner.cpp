@@ -31,5 +31,7 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 				ASC->ApplyGameplayEffectToSelf(Effect, 1, Context);
 			}
 		}
+
+		// TODO: On hit effects
 	}
 }
