@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemInterface.h"
+#include "PlayerAttributeSet.h"
 #include "ProjectGwenCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -20,8 +21,6 @@ class AProjectGwenCharacter : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
-	UPROPERTY(EditAnywhere, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
 public:
 	AProjectGwenCharacter();
 
@@ -32,6 +31,10 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category = "Abilities")
+	UAbilitySystemComponent* AbilitySystemComponent;
 
 protected:
 
