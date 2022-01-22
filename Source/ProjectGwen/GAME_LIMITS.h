@@ -32,6 +32,7 @@ namespace GAME_LIMITS {
 //This probably doesn't account for deep/indirect data.
 static constexpr int AACTOR_SIZE = sizeof(AActor);
 static constexpr int UOBJECT_SIZE = sizeof(UObject);
+static constexpr int UDATA_ASSET_SIZE = sizeof(UDataAsset);
 static constexpr int UACTOR_COMPONENT_SIZE = sizeof(UActorComponent);
 static constexpr int USCENE_COMPONENT_SIZE = sizeof(USceneComponent);
 static constexpr int UPRIMITIVE_COMPONENT_SIZE = sizeof(UPrimitiveComponent);

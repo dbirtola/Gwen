@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "EngineGlobals.h"
+#include "Engine.h"
 
 inline void printErrorToScreen(const FString& str) {
 	FString errorMsg = "Error: ";
