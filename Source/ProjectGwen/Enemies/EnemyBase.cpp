@@ -2,3 +2,18 @@
 
 
 #include "EnemyBase.h"
+
+#include "AbilitySystemComponent.h"
+#include "ProjectGwen/PlayerAttributeSet.h"
+
+AEnemyBase::AEnemyBase()
+{
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(FName("Ability System Component"));
+	EnemyAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(FName("Ability System Component"));
+	AbilitySystemComponent->AddAttributeSetSubobject(EnemyAttributeSet);
+}
+
+UAbilitySystemComponent* AEnemyBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
