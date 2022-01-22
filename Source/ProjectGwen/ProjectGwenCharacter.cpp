@@ -43,10 +43,6 @@ AProjectGwenCharacter::AProjectGwenCharacter()
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
 	FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
-
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("Ability System Component"));
-	PlayerAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(FName("PlayerAttribute"));
-	AbilitySystemComponent->AddAttributeSetSubobject(PlayerAttributeSet);
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -81,12 +77,6 @@ void AProjectGwenCharacter::SetupPlayerInputComponent(class UInputComponent* Pla
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AProjectGwenCharacter::OnResetVR);
 }
 
-UAbilitySystemComponent* AProjectGwenCharacter::GetAbilitySystemComponent() const
-{
-	return AbilitySystemComponent;
-}
-
-
 void AProjectGwenCharacter::OnResetVR()
 {
 	// If ProjectGwen is added to a project via 'Add Feature' in the Unreal Editor the dependency on HeadMountedDisplay in ProjectGwen.Build.cs is not automatically propagated
@@ -108,11 +98,6 @@ void AProjectGwenCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector 
 		StopJumping();
 }
 
-float AProjectGwenCharacter::GetFinalMovementSpeed() const
-{
-	return PlayerAttributeSet->GetCurrentSpeed();;
-}
-
 void AProjectGwenCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
@@ -127,9 +112,7 @@ void AProjectGwenCharacter::LookUpAtRate(float Rate)
 
 void AProjectGwenCharacter::MoveForward(float Value)
 {
-	float AdjustedValue = Value * GetFinalMovementSpeed();
-
-	if ((Controller != nullptr) && (AdjustedValue != 0.0f))
+	if ((Controller != nullptr) && (Value != 0.0f))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -137,15 +120,13 @@ void AProjectGwenCharacter::MoveForward(float Value)
 
 		// get forward vector
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, AdjustedValue);
+		AddMovementInput(Direction, Value);
 	}
 }
 
 void AProjectGwenCharacter::MoveRight(float Value)
 {
-	float AdjustedValue = Value * GetFinalMovementSpeed();
-	
-	if ( (Controller != nullptr) && (AdjustedValue != 0.0f) )
+	if ( (Controller != nullptr) && (Value != 0.0f) )
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
@@ -154,6 +135,6 @@ void AProjectGwenCharacter::MoveRight(float Value)
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 		// add movement in that direction
-		AddMovementInput(Direction, AdjustedValue);
+		AddMovementInput(Direction, Value);
 	}
 }

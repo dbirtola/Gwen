@@ -8,12 +8,4 @@
 
 AEnemyBase::AEnemyBase()
 {
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>(FName("Ability System Component"));
-	EnemyAttributeSet = CreateDefaultSubobject<UPlayerAttributeSet>(FName("Player Attribute Set"));
-	AbilitySystemComponent->AddAttributeSetSubobject(EnemyAttributeSet);
-}
-
-UAbilitySystemComponent* AEnemyBase::GetAbilitySystemComponent() const
-{
-	return AbilitySystemComponent;
 }
