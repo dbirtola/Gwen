@@ -1,0 +1,38 @@
+This plugin holds a variety of utilities.
+
+ActorPooling:
+Very useful for reducing the overhead of spawning lots of actors overtime.
+Ideal for things like projectiles.
+1. Inherit from PooledActor(APooledActor in C++)
+2. Call actorPoolGetActor to get a new instance.
+Params: 
+	classType - Class type to spawn
+	instigator - The actor responsible for spawning (to spawn in the correct level)
+	transform - Global transform dictating where the actor should spawn
+3. On actor's EndPlay call actorPoolReturnActor to recycle actor back into the pool (optional)
+Params:
+	actor - Actor to be recycled back into pool
+
+
+
+ECS:
+This should probably be moved into an engine plugin or something else or reworked
+so that systems can be programmed in project code directly.
+It's an Entity Component System which is ideal for game programming in "most" situations.
+Specifically designed to be very modable and data driven.
+1.  Inside ECSGameMode is where systems logic should go (no system handler in the ECS lib currently)
+2.  Content/Data is where one should create all data component files.
+3.  Inside your custom actor create an ECSEntityRefComponent component.
+4.  On begin play call this component's getComponentDataFromFile method.
+Params:
+	filePath - File path (including file extension) to the entity file starting from the 
+Content/Data directory
+
+NOTES:
+Currently strings in data component files are stored as custom Name objects which are exactly 4 bytes large.
+Making them the exact same size as numbers, only non floating point numbers may be used currently.
+Arrays may not be of variable length currently.
+Example data component file:
+health = 5;
+name = "bob";
+arrayOfThings = [5, "bla", 42];
