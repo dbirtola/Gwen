@@ -4,6 +4,7 @@
 #include "GwenCharacterBase.h"
 
 #include "GameplayTagsManager.h"
+#include "MeshAttributeArray.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 
@@ -40,4 +41,21 @@ void AGwenCharacterBase::TickActor(float DeltaTime, ELevelTick TickType, FActorT
 UAbilitySystemComponent* AGwenCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void AGwenCharacterBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (AbilitySystemComponent)
+	{
+		HealthChangedDelegateHandle = AbilitySystemComponent
+		->GetGameplayAttributeValueChangeDelegate(AttributeSet->GetCurrentHealthAttribute())
+		.AddUObject(this, &AGwenCharacterBase::OnCurrentHealthChanged);
+	}
+}
+
+void AGwenCharacterBase::OnCurrentHealthChanged(const FOnAttributeChangeData& Data)
+{
+	BP_OnHealthChanged(Data.NewValue, Data.OldValue);
 }
