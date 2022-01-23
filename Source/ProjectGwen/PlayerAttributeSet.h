@@ -17,12 +17,17 @@ GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 /**
  * 
  */
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangeDelegate, float, Health);
+
 UCLASS()
 class PROJECTGWEN_API UPlayerAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 
 public:
+	FOnHealthChangeDelegate OnHealthChange;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attributes")
 	FGameplayAttributeData CurrentHealth = 100;
 	ATTRIBUTE_ACCESSORS(UPlayerAttributeSet, CurrentHealth)
