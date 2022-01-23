@@ -7,7 +7,7 @@
 #include "DayNightManager.generated.h"
 
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnNightReached);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FGenericDynamicMulticastDelegate);
 
 USTRUCT(BlueprintType)
 struct FTimeOfDay
@@ -35,6 +35,7 @@ class PROJECTGWEN_API ADayNightManager : public AActor
 	// legit forget the syntax for max float in ue4
 	float SkipToTime = SkipToTimeMax;
 public:
+	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	// time of day measured in 24 hour time, by seconds.
 	float TimeOfDay = 0;
@@ -52,6 +53,7 @@ public:
 	bool bPauseAtMidnight = true;
 
 	bool bHasBroadcastedNightReached = false;
+	bool bHasBroadcastedDayReached = false;
 	
 	// Measured in InGameMinutes per RealSecond. Overriden by calls to SetDaytimeDuration
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -75,5 +77,8 @@ public:
 	void AdjustLightActor();
 
 	UPROPERTY(BlueprintAssignable)
-	FOnNightReached OnNightReached;
+	FGenericDynamicMulticastDelegate OnNightReached;
+
+	UPROPERTY(BlueprintAssignable)
+	FGenericDynamicMulticastDelegate OnDayReached;
 };
