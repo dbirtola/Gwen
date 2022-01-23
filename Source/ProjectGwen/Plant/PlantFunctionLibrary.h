@@ -20,4 +20,6 @@ public:
 	static APlantActor* PlantCreate(TSubclassOf<APlantActor> ClassType, AActor* SpawningActor, const FTransform& Transform);
 	UFUNCTION(BlueprintCallable, Category = "Plant")
 	static void PlantSystemTick();
+	UFUNCTION(BlueprintCallable, Category = "Plant")
+	static void PlantSystemEnd();
 };

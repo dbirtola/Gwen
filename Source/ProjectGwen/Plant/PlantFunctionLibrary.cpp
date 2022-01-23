@@ -32,3 +32,6 @@ void UPlantFunctionLibrary::PlantSystemTick() {
 		plantPool[i]->TickGrowth();
 	}
 }
+void UPlantFunctionLibrary::PlantSystemEnd() {
+	plantPool.count = 0;
+}
