@@ -19,6 +19,15 @@ class PROJECTGWEN_API AGwenCharacterBase : public ACharacter, public IAbilitySys
 public:
 
 	AGwenCharacterBase();
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Death")
+	bool bIsAlive = true;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="Death")
+	float RagdollTime = 2.5f;
+
+	UFUNCTION(BlueprintCallable, Category="Death")
+	void EnableRagdoll();
 	
 	virtual void TickActor(float DeltaTime, ELevelTick TickType, FActorTickFunction& ThisTickFunction) override;
 	
