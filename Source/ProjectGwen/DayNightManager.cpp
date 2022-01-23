@@ -35,10 +35,20 @@ void ADayNightManager::TickActor(float DeltaTime, ELevelTick TickType, FActorTic
 
 	float NightFallMinutes = (NighttimeStartTime.Hour * 60) + NighttimeStartTime.Minutes;
 
+	// broadcast night reached
 	if(TimeOfDay > NightFallMinutes && !bHasBroadcastedNightReached)
 	{
 		bHasBroadcastedNightReached = true;
 		OnNightReached.Broadcast();
+	}
+	
+	float DaytimeStartMinutes = (DaytimeStartTime.Hour * 60) + DaytimeStartTime.Minutes;
+
+	// broadcast day reached
+	if(TimeOfDay > DaytimeStartMinutes && !bHasBroadcastedDayReached)
+	{
+		bHasBroadcastedDayReached = true;
+		OnDayReached.Broadcast();
 	}
 	
 	if(TimeOfDay >= (24*60))
@@ -54,6 +64,7 @@ void ADayNightManager::TickActor(float DeltaTime, ELevelTick TickType, FActorTic
 			{
 				TimeOfDay = 0;
 				bHasBroadcastedNightReached = false;
+				bHasBroadcastedDayReached = false;
 			}
 			else
 			{
@@ -77,7 +88,7 @@ void ADayNightManager::AdjustLightActor()
 	
 		float PercentThroughoutDay = TimeOfDay / (24*60);
 		
-		FRotator Rotator = FRotator::MakeFromEuler(FVector(0, PercentThroughoutDay * 360.0f, 0));
+		FRotator Rotator = FRotator::MakeFromEuler(FVector(0, (PercentThroughoutDay * 360.0f) + 90, 0));
 		LightSource->SetActorRotation(Rotator, ETeleportType::ResetPhysics);
 	}
 }
