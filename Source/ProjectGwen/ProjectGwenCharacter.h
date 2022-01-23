@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GwenCharacterBase.h"
-#include "GameFramework/Character.h"
 #include "ProjectGwenCharacter.generated.h"
 
 UCLASS(config=Game)

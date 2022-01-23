@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "UObject/Object.h"
 #include "AbilitySystemInterface.h"
 #include "PlayerAttributeSet.h"
 #include "GwenCharacterBase.generated.h"

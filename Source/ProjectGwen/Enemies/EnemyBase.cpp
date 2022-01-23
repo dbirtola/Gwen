@@ -3,9 +3,6 @@
 
 #include "EnemyBase.h"
 
-#include "AbilitySystemComponent.h"
-#include "ProjectGwen/PlayerAttributeSet.h"
-
 AEnemyBase::AEnemyBase()
 {
 }
