@@ -36,6 +36,5 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 			}
 			// TODO: On hit effects
 		}
-
 	}
 }

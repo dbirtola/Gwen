@@ -27,11 +27,11 @@ void AGwenCharacterBase::TickActor(float DeltaTime, ELevelTick TickType, FActorT
 	{
 		if(ASC->HasMatchingGameplayTag(UGameplayTagsManager::Get().RequestGameplayTag(FName("Status.CrowdControl.Stun"))))
 		{
-			GetCharacterMovement()->MovementMode = EMovementMode::MOVE_None;
+			//GetCharacterMovement()->MovementMode = EMovementMode::MOVE_None;
 		}
 		else
 		{
-			GetCharacterMovement()->MovementMode = EMovementMode::MOVE_Walking;
+			//GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		}
 	}
 }
