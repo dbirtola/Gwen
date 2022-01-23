@@ -6,7 +6,6 @@
 #include "ProjectGwen/GwenCharacterBase.h"
 #include "EnemyBase.generated.h"
 
-class UAbilitySytemComponent;
 class UPlayerAttributeSet;
 
 /**
