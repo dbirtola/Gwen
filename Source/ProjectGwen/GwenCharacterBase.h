@@ -30,4 +30,14 @@ public:
 
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+protected:
+	FDelegateHandle HealthChangedDelegateHandle;
+	
+	virtual void BeginPlay() override;
+
+	void OnCurrentHealthChanged(const FOnAttributeChangeData& Data);
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "Attributes", meta=(DisplayName="OnHealthChanged"))
+	void BP_OnHealthChanged(float Health, float OldHealth);
 };

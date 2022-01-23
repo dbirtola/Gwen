@@ -12,7 +12,7 @@ class AProjectGwenGameMode : public AGameModeBase
 	GENERATED_BODY()
 
 public:
-	AProjectGwenGameMode();
+
 };
 
 

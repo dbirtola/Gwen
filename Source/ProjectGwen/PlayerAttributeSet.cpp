@@ -2,13 +2,15 @@
 
 
 #include "PlayerAttributeSet.h"
+#include "GameplayEffectExtension.h"
 
 void UPlayerAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
 
-	if(GetCurrentHealth() <= 0)
+	if (Data.EvaluatedData.Attribute == GetCurrentHealthAttribute())
 	{
-		GetOwningActor()->Destroy();
+		SetCurrentHealth(FMath::Clamp(GetCurrentHealth(), 0.f, GetMaximumHealth()));
+		OnHealthChange.Broadcast(CurrentHealth.GetCurrentValue());
 	}
 }
