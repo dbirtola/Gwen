@@ -6,10 +6,15 @@
 #include "../GAME_LIMITS.h"
 #include "../deps/IO/IO.h"
 
-FlatBuffer<APlantActor*, GAME_LIMITS::MAX_DYNAMIC_ACTOR_COUNT> plantPool;
+FlatBuffer<APlantActor*, GAME_LIMITS::MAX_STATIC_ACTOR_COUNT> plantPool;
 
-APlantActor* UPlantFunctionLibrary::PlantCreate(TSubclassOf<APlantActor> classType, UWorld* world, const FTransform& transform) {
-	APlantActor* plant = Cast<APlantActor>(UActorPoolFunctionLibrary::actorPoolGetActor(classType, world, transform));
+APlantActor* UPlantFunctionLibrary::PlantCreate(TSubclassOf<APlantActor> ClassType, AActor* SpawningActor, const FTransform& Transform) {
+	UWorld* world = SpawningActor->GetWorld();
+	if(ClassType == nullptr) {
+		printErrorToScreen("PlantFunctionLibrary::PlantCreate()'s ClassType was nullptr");
+		return nullptr;  //TODO: Decide if we should just throw here instead.
+	}
+	APlantActor* plant = Cast<APlantActor>(UActorPoolFunctionLibrary::actorPoolGetActor(ClassType, world, Transform));
 	if (plant == nullptr) {
 		printErrorToScreen("PlantFunctionLibrary::PlantCreate() could not get another pooled APlantActor");
 		return nullptr;  //TODO: Decide if we should just throw here instead.

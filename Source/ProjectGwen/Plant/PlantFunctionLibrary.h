@@ -17,7 +17,7 @@ class UPlantFunctionLibrary : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 public:
 	UFUNCTION(BlueprintCallable, Category = "Plant")
-	static APlantActor* PlantCreate(TSubclassOf<APlantActor> classType, UWorld* world, const FTransform& transform);
+	static APlantActor* PlantCreate(TSubclassOf<APlantActor> ClassType, AActor* SpawningActor, const FTransform& Transform);
 	UFUNCTION(BlueprintCallable, Category = "Plant")
 	static void PlantSystemTick();
 };

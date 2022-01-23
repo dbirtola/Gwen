@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "PooledActor.h"
 #include "PlantActor.generated.h"
 
 UCLASS()
-class APlantActor : public AActor {
+class APlantActor : public APooledActor {
 	GENERATED_BODY()
 	uint32_t currentGrowth = 0;
 	uint32_t maxGrowth = 5000;
@@ -35,8 +36,8 @@ public:
 	void SetMaxGrowth(int32 NewMaxGrowth) {
 		maxGrowth = (uint32_t)NewMaxGrowth;
 	}
-	UFUNCTION(BlueprintCallable, Category = "growth | swap")
-	virtual void SwapMeshOnMiddleGrowth() {}
-	UFUNCTION(BlueprintCallable, Category = "growth | swap")
-	virtual void SwapMeshOnCompletedGrowth() {}
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
+	void SwapMeshOnMiddleGrowth();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
+	void SwapMeshOnCompletedGrowth();
 };

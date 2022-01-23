@@ -20,7 +20,8 @@ void APooledActor::BeginPlay() {
 void APooledActor::initOnGet() {
 	SetActorEnableCollision(true);
 	SetActorHiddenInGame(false);
-	SetActorTickEnabled(true);  //Probably should re enable this on booleon condition.
+	if (canTickOnWakeup)
+		SetActorTickEnabled(true);
 }
 
 void APooledActor::resetOnReturn() {
