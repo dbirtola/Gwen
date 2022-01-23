@@ -3,12 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Character.h"
-#include "AbilitySystemInterface.h"
+#include "GwenCharacterBase.h"
 #include "ProjectGwenCharacter.generated.h"
 
 UCLASS(config=Game)
-class AProjectGwenCharacter : public ACharacter, public IAbilitySystemInterface
+class AProjectGwenCharacter : public AGwenCharacterBase
 {
 	GENERATED_BODY()
 
@@ -20,8 +19,6 @@ class AProjectGwenCharacter : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 
-	UPROPERTY(EditAnywhere, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
 public:
 	AProjectGwenCharacter();
 
@@ -62,6 +59,8 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	float GetFinalMovementSpeed() const;
+	
 protected:
 	// APawn interface
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -73,6 +72,5 @@ public:
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 	
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 

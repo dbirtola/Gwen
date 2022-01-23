@@ -7,8 +7,7 @@ public class ProjectGwen : ModuleRules
 	public ProjectGwen(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
-
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore",
-			"HeadMountedDisplay", "GameplayAbilities", "PaulsUtilities" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", 
+			"HeadMountedDisplay", "GameplayAbilities", "GameplayTags", "PaulsUtilities" });
 	}
 }
