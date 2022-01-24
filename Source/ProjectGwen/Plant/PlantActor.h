@@ -7,6 +7,8 @@
 #include "PooledActor.h"
 #include "PlantActor.generated.h"
 
+class UGameplayEffect;
+
 UCLASS()
 class APlantActor : public APooledActor {
 	GENERATED_BODY()
@@ -46,4 +48,7 @@ public:
 			return true;
 		return false;
 	}
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<UGameplayEffect> GameplayEffects;
 };
