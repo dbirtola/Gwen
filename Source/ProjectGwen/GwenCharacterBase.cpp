@@ -15,6 +15,12 @@ AGwenCharacterBase::AGwenCharacterBase()
 	AbilitySystemComponent->AddAttributeSetSubobject(AttributeSet);
 }
 
+void AGwenCharacterBase::EnableRagdoll()
+{
+	GetMesh()->SetSimulatePhysics(true);
+	GetCharacterMovement()->DisableMovement();
+}
+
 void AGwenCharacterBase::TickActor(float DeltaTime, ELevelTick TickType, FActorTickFunction& ThisTickFunction)
 {
 	Super::TickActor(DeltaTime, TickType, ThisTickFunction);
