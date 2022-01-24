@@ -157,10 +157,13 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 
 			if(UAbilitySystemComponent* ASC = Enemy->GetAbilitySystemComponent())
 			{
-				for(UGameplayEffect* Effect : EnemyData->SpawnEffects)
+				for(TSubclassOf<UGameplayEffect> Effect : EnemyData->SpawnEffects)
 				{
-					FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
-					ASC->ApplyGameplayEffectToSelf(Effect, 1, Context);
+					if(Effect)
+					{
+						FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
+						ASC->ApplyGameplayEffectToSelf(Effect->GetDefaultObject<UGameplayEffect>(), 1, Context);	
+					}
 				}
 			}
 			// TODO: On hit effects
