@@ -144,6 +144,7 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 
 		if(Enemy)
 		{
+			Enemy->EnemyTypeData = EnemyData;
 			
 			if(EnemyData->MeshOverride)
 			{
@@ -166,6 +167,7 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 					}
 				}
 			}
+			
 			// TODO: On hit effects
 		}
 	}
