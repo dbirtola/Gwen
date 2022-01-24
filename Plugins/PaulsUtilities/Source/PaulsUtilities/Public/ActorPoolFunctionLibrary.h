@@ -16,5 +16,4 @@ public:
     static APooledActor* actorPoolGetActor(UClass* classType, UWorld* world, const FTransform& transform);
     UFUNCTION(BlueprintCallable, Category = "PaulsUtilities")
     static void actorPoolReturnActor(APooledActor* actor);
-
 };
