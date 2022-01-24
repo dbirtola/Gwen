@@ -157,7 +157,7 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 
 			if(UAbilitySystemComponent* ASC = Enemy->GetAbilitySystemComponent())
 			{
-				for(UGameplayEffect* Effect : EnemyData->EnemyEffects)
+				for(UGameplayEffect* Effect : EnemyData->SpawnEffects)
 				{
 					FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
 					ASC->ApplyGameplayEffectToSelf(Effect, 1, Context);

@@ -31,7 +31,7 @@ public:
 	FString TEMP_SeedDropped;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<UGameplayEffect*> EnemyEffects;
+	TArray<UGameplayEffect*> SpawnEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<UGameplayEffect*> OnHitEffects;
