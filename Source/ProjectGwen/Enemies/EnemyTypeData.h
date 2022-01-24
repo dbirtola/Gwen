@@ -40,5 +40,5 @@ public:
 	int32 EnemyPowerLevel = 1;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float MinimumWaveForSpawning = 1;
+	int32 MinimumWaveForSpawning = 1;
 };
