@@ -159,8 +159,11 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 			{
 				for(TSubclassOf<UGameplayEffect> Effect : EnemyData->SpawnEffects)
 				{
-					FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
-					ASC->ApplyGameplayEffectToSelf(Effect->GetDefaultObject<UGameplayEffect>(), 1, Context);
+					if(Effect)
+					{
+						FGameplayEffectContextHandle Context = ASC->MakeEffectContext();
+						ASC->ApplyGameplayEffectToSelf(Effect->GetDefaultObject<UGameplayEffect>(), 1, Context);	
+					}
 				}
 			}
 			// TODO: On hit effects
