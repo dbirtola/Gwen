@@ -6,6 +6,7 @@
 #include "ProjectGwen/GwenCharacterBase.h"
 #include "EnemyBase.generated.h"
 
+class UEnemyTypeData;
 class UPlayerAttributeSet;
 
 /**
@@ -18,4 +19,8 @@ private:
 	GENERATED_BODY()
 
 	AEnemyBase();
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UEnemyTypeData* EnemyTypeData;
 };

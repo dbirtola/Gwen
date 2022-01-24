@@ -6,6 +6,7 @@
 #include "UObject/Object.h"
 #include "EnemyTypeData.generated.h"
 
+class UPlantData;
 class AEnemyBase;
 class UGameplayEffect;
 /**
@@ -28,11 +29,17 @@ public:
 	TSubclassOf<UAnimInstance> AnimBPOverride;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FString TEMP_SeedDropped;
+	UPlantData* SeedDropped;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<UGameplayEffect*> EnemyEffects;
+	TArray<TSubclassOf<UGameplayEffect>> SpawnEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<UGameplayEffect*> OnHitEffects;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 EnemyPowerLevel = 1;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 MinimumWaveForSpawning = 1;
 };
