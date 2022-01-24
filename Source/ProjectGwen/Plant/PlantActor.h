@@ -40,4 +40,10 @@ public:
 	void SwapMeshOnMiddleGrowth();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
 	void SwapMeshOnCompletedGrowth();
+	UFUNCTION(BlueprintCallable, Category = "growth | plant")
+	bool IsFullyGrown() {
+		if (currentGrowth >= maxGrowth)
+			return true;
+		return false;
+	}
 };
