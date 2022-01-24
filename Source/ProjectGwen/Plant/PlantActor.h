@@ -3,9 +3,30 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "PooledActor.h"
 #include "PlantActor.generated.h"
+
+class UGameplayEffect;
+
+class APlantActor;
+
+UCLASS(BlueprintType)
+class UPlantData : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FName SeedName;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<APlantActor> PlantActorBlueprint;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<TSubclassOf<UGameplayEffect>> HarvestEffects;
+};
 
 UCLASS()
 class APlantActor : public APooledActor {
@@ -46,4 +67,7 @@ public:
 			return true;
 		return false;
 	}
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<UGameplayEffect> GameplayEffects;
 };
