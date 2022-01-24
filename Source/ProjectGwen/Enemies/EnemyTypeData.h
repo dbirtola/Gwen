@@ -31,8 +31,14 @@ public:
 	FString TEMP_SeedDropped;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<UGameplayEffect*> EnemyEffects;
+	TArray<UGameplayEffect*> SpawnEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<UGameplayEffect*> OnHitEffects;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 EnemyPowerLevel = 1;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	int32 MinimumWaveForSpawning = 1;
 };
