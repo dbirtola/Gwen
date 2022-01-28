@@ -3,7 +3,7 @@
 
 #include "PlantFunctionLibrary.h"
 #include "../deps/FlatBuffer/FlatBuffer.h"
-#include "../GAME_LIMITS.h"
+#include "PaulsUtilities/Public/GAME_LIMITS.h"
 #include "PaulsUtilities/Public/IOFunctionLibrary.h"
 
 FlatBuffer<APlantActor*, GAME_LIMITS::MAX_STATIC_ACTOR_COUNT> plantPool;
