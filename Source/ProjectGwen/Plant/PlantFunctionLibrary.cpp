@@ -29,7 +29,10 @@ APlantActor* UPlantFunctionLibrary::PlantCreate(TSubclassOf<APlantActor> ClassTy
 void UPlantFunctionLibrary::PlantSystemTick() {
 	const uint32_t count = plantPool.count;
 	for (uint32_t i = 0; i < count; i++) {
-		plantPool[i]->TickGrowth();
+		if (IsValid(plantPool[i]))
+		{
+			plantPool[i]->TickGrowth();
+		}
 	}
 }
 void UPlantFunctionLibrary::PlantSystemEnd() {
