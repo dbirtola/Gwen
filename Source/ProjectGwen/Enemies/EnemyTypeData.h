@@ -35,11 +35,14 @@ public:
 	TArray<TSubclassOf<UGameplayEffect>> SpawnEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	TArray<UGameplayEffect*> OnHitEffects;
+	TArray<TSubclassOf<UGameplayEffect>> OnHitEffects;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 EnemyPowerLevel = 1;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	int32 MinimumWaveForSpawning = 1;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* OnHitEffect;
 };
