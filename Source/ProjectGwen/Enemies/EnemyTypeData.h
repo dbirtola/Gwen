@@ -45,4 +45,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	UParticleSystem* OnHitEffect;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* OnSpawnEffect;
+	
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* OnDeathEffect;
 };

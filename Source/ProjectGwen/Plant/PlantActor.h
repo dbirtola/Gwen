@@ -27,6 +27,9 @@ public:
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<TSubclassOf<UGameplayEffect>> HarvestEffects;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* OnDamageTakenEmitter;
 };
 
 UCLASS()
