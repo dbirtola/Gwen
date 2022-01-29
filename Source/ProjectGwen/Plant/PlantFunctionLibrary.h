@@ -16,8 +16,10 @@ UCLASS()
 class UPlantFunctionLibrary : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 public:
-	UFUNCTION(BlueprintCallable, Category = "Plant")
-	static APlantActor* PlantCreate(TSubclassOf<APlantActor> ClassType, AActor* SpawningActor, const FTransform& Transform);
+	UFUNCTION(BlueprintCallable, Category = "Plant | system | create | construct")
+	static APlantActor* PlantEnlist(TSubclassOf<APlantActor> ClassType, AActor* SpawningActor, const FTransform& Transform);
+	UFUNCTION(BlueprintCallable, Category = "Plant | system | destroy | destruct")
+	static void PlantDelist(APlantActor* PlantActor);
 	UFUNCTION(BlueprintCallable, Category = "Plant")
 	static void PlantSystemTick();
 	UFUNCTION(BlueprintCallable, Category = "Plant")

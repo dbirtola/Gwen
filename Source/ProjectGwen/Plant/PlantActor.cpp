@@ -2,7 +2,11 @@
 
 
 #include "PlantActor.h"
+#include "PlantFunctionLibrary.h"
 
+void APlantActor::DelistSelf() {
+	UPlantFunctionLibrary::PlantDelist(this);
+}
 
 // Sets default values
 APlantActor::APlantActor()
