@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 //#include "PlantFunctionLibrary.h"
+#include "Styling/SlateBrush.h"
 #include "GameFramework/Actor.h"
 #include "PooledActor.h"
+#include "Components/Image.h"
 #include "PlantActor.generated.h"
 
 class UGameplayEffect;
@@ -21,6 +23,9 @@ class UPlantData : public UDataAsset
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FName SeedName;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UTexture2D* SeedIcon;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<APlantActor> PlantActorBlueprint;
