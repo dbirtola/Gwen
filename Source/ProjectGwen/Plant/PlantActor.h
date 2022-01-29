@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+//#include "PlantFunctionLibrary.h"
 #include "GameFramework/Actor.h"
 #include "PooledActor.h"
 #include "PlantActor.generated.h"
@@ -31,34 +32,42 @@ public:
 UCLASS()
 class APlantActor : public APooledActor {
 	GENERATED_BODY()
-	uint32_t currentGrowth = 0;
-	uint32_t maxGrowth = 5000;
-	uint32_t growthPerTick = 10;
+	enum {
+		STAGE_0_PERCENT,
+		STAGE_25_PERCENT,
+		STAGE_50_PERCENT,
+		STAGE_100_PERCENT
+	};
 public:
+	int32 currentGrowth = 0;  //positive values only
+	int32 maxGrowth = 5000;  //positive values only
+	int32 growthPerTick = 10; //positive values only
+	uint8_t currentStage = STAGE_0_PERCENT;
+	
 	APlantActor();
 	
 	// currently ticks growth by (uint32_t)(multiplier*10)
 	FORCEINLINE void TickGrowth(float multiplier = 1) {
-		uint32_t newGrowth = growthPerTick * multiplier + currentGrowth;
-		if(maxGrowth < newGrowth) {
+		int32 newGrowth = growthPerTick * multiplier + currentGrowth;
+		if(maxGrowth < newGrowth) 
 			currentGrowth = maxGrowth;
-			SwapMeshOnCompletedGrowth();
-		}
-		currentGrowth = newGrowth;
+		else
+			currentGrowth = newGrowth;
+		advancePlantStage();
 	}
+
+	UFUNCTION(BlueprintCallable, Category = "growth | plant")
+	void DelistSelf();
 
 protected:
 	virtual void BeginPlay() override;
 
 public:
 	virtual void Tick(float DeltaTime) override;
-	UFUNCTION(BlueprintCallable, Category = "growth | max")
-	//positive values only
-	void SetMaxGrowth(int32 NewMaxGrowth) {
-		maxGrowth = (uint32_t)NewMaxGrowth;
-	}
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
-	void SwapMeshOnMiddleGrowth();
+	void SwapMeshOn25PercentGrowth();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
+	void SwapMeshOn50PercentGrowth();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
 	void SwapMeshOnCompletedGrowth();
 	UFUNCTION(BlueprintCallable, Category = "growth | plant")
@@ -66,6 +75,41 @@ public:
 		if (currentGrowth >= maxGrowth)
 			return true;
 		return false;
+	}
+	bool Is25PercentGrown() {
+		if (currentGrowth >= maxGrowth/4)
+			return true;
+		return false;
+	}
+	bool Is50PercentGrown() {
+		if (currentGrowth >= maxGrowth/2)
+			return true;
+		return false;
+	}
+
+	void advancePlantStage() {
+		switch(currentStage) {
+		case STAGE_0_PERCENT:
+			if(Is25PercentGrown()) {
+				SwapMeshOn25PercentGrowth();
+				currentStage++;
+			}
+			return;
+		case STAGE_25_PERCENT:
+			if(Is50PercentGrown()) {
+				SwapMeshOn50PercentGrowth();
+				currentStage++;
+			}
+			return;
+		case STAGE_50_PERCENT:
+			if(IsFullyGrown()) {
+				SwapMeshOnCompletedGrowth();
+				currentStage++;
+			}
+			return;
+		case STAGE_100_PERCENT:
+			return;
+		}
 	}
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
