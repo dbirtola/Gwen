@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "PlantFunctionLibrary.h"
+//#include "PlantFunctionLibrary.h"
 #include "GameFramework/Actor.h"
 #include "PooledActor.h"
 #include "PlantActor.generated.h"
@@ -48,7 +48,7 @@ public:
 	
 	// currently ticks growth by (uint32_t)(multiplier*10)
 	FORCEINLINE void TickGrowth(float multiplier = 1) {
-		uint32_t newGrowth = growthPerTick * multiplier + currentGrowth;
+		int32 newGrowth = growthPerTick * multiplier + currentGrowth;
 		if(maxGrowth < newGrowth) 
 			currentGrowth = maxGrowth;
 		else
@@ -57,13 +57,7 @@ public:
 	}
 
 	UFUNCTION(BlueprintCallable, Category = "growth | plant")
-	void EnlistSelf() {
-		UPlantFunctionLibrary::PlantEnlist(this);
-	}
-	UFUNCTION(BlueprintCallable, Category = "growth | plant")
-	void DelistSelf() {
-		UPlantFunctionLibrary::PlantDelist(this);
-	}
+	void DelistSelf();
 
 protected:
 	virtual void BeginPlay() override;
