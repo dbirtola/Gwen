@@ -43,7 +43,10 @@ void UPlantFunctionLibrary::PlantDelist(APlantActor* PlantActor){
 void UPlantFunctionLibrary::PlantSystemTick() {
 	const uint32_t count = plantsToTick.count;
 	for (uint32_t i = 0; i < count; i++) {
-		plantsToTick[i]->TickGrowth();
+		if(IsValid(plantsToTick[i]))
+		{
+			plantsToTick[i]->TickGrowth();
+		}
 	}
 }
 void UPlantFunctionLibrary::PlantSystemEnd() {
