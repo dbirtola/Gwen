@@ -29,7 +29,10 @@ public:
 	TSubclassOf<UAnimInstance> AnimBPOverride;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	UPlantData* SeedDropped;
+	TArray<UPlantData*> SeedsDropped;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TArray<float> DropChances;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<TSubclassOf<UGameplayEffect>> SpawnEffects;
