@@ -32,7 +32,8 @@ void UPlantFunctionLibrary::PlantDelist(APlantActor* PlantActor){
 		APlantActor* compareTo = plantsToTick[i];
 		if(PlantActor == compareTo) {
 			plantsToTick.pop();
-			plantsToTick[i] = plantsToTick[count];
+			plantsToTick[i] = plantsToTick[count -1];
+			plantsToTick[count - 1] = nullptr;
 			UActorPoolFunctionLibrary::actorPoolReturnActor(PlantActor);
 			return;
 		}
