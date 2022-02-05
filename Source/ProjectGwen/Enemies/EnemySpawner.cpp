@@ -147,7 +147,7 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 	if(EnemyData)
 	{
 		AEnemyBase* Enemy = Cast<AEnemyBase>(GetWorld()->SpawnActor(EnemyData->BaseClass, &SpawnTransform));
-
+		Enemy->EnemyTypeData = EnemyData;
 		if(Enemy)
 		{
 			Enemy->EnemyTypeData = EnemyData;
