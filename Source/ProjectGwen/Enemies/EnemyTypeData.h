@@ -12,7 +12,7 @@ class UGameplayEffect;
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType)
 class PROJECTGWEN_API UEnemyTypeData : public UDataAsset
 {
 	GENERATED_BODY()

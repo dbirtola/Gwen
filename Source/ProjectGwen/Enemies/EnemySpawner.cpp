@@ -74,6 +74,11 @@ void AEnemySpawner::BeginPlay()
 		EnemyTypes.Add(*It);
 	}
 
+	if(EnemyTypes.IsEmpty())
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString("No enemies in package"));
+	}
+
 	TArray<AActor*> SpawnPointActors;
 	UGameplayStatics::GetAllActorsOfClass(this, AEnemySpawnPoint::StaticClass(), SpawnPointActors);
 	for(AActor* SpawnPointActor : SpawnPointActors)
@@ -101,6 +106,7 @@ void AEnemySpawner::GenerateWave(int32 WaveNumber)
 			}
 			else
 			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString("Invalid Enemy"));
 				return;
 			}
 		}
@@ -170,5 +176,8 @@ void AEnemySpawner::SpawnEnemy(UEnemyTypeData* EnemyData, const FTransform& Spaw
 			
 			// TODO: On hit effects
 		}
+	}else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Red, FString("Invalid enemy data"));
 	}
 }
