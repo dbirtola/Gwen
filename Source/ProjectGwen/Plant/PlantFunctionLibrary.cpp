@@ -32,7 +32,8 @@ void UPlantFunctionLibrary::PlantDelist(APlantActor* PlantActor){
 		APlantActor* compareTo = plantsToTick[i];
 		if(PlantActor == compareTo) {
 			plantsToTick.pop();
-			plantsToTick[i] = plantsToTick[count];
+			plantsToTick[i] = plantsToTick[count -1];
+			plantsToTick[count - 1] = nullptr;
 			UActorPoolFunctionLibrary::actorPoolReturnActor(PlantActor);
 			return;
 		}
@@ -43,7 +44,10 @@ void UPlantFunctionLibrary::PlantDelist(APlantActor* PlantActor){
 void UPlantFunctionLibrary::PlantSystemTick() {
 	const uint32_t count = plantsToTick.count;
 	for (uint32_t i = 0; i < count; i++) {
-		plantsToTick[i]->TickGrowth();
+		if(IsValid(plantsToTick[i]))
+		{
+			plantsToTick[i]->TickGrowth();
+		}
 	}
 }
 void UPlantFunctionLibrary::PlantSystemEnd() {

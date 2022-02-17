@@ -5,8 +5,10 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 //#include "PlantFunctionLibrary.h"
+#include "Styling/SlateBrush.h"
 #include "GameFramework/Actor.h"
 #include "PooledActor.h"
+#include "Components/Image.h"
 #include "PlantActor.generated.h"
 
 class UGameplayEffect;
@@ -21,12 +23,33 @@ class UPlantData : public UDataAsset
 public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FName SeedName;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UTexture2D* SeedIcon;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TSubclassOf<APlantActor> PlantActorBlueprint;
 	
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TArray<TSubclassOf<UGameplayEffect>> HarvestEffects;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UParticleSystem* OnDamageTakenEmitter;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AActor> FreshlyPlantedBlueprint;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AActor> QuarterGrownBlueprint;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AActor> HalfGrownBlueprint;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AActor> ThreeQuarterGrownBlueprint;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TSubclassOf<AActor> FullyGrownBlueprint;
 };
 
 UCLASS()
@@ -36,6 +59,7 @@ class APlantActor : public APooledActor {
 		STAGE_0_PERCENT,
 		STAGE_25_PERCENT,
 		STAGE_50_PERCENT,
+		STAGE_75_PERCENT,
 		STAGE_100_PERCENT
 	};
 public:
@@ -56,6 +80,9 @@ public:
 		advancePlantStage();
 	}
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	UPlantData* PlantData;
+	
 	UFUNCTION(BlueprintCallable, Category = "growth | plant")
 	void DelistSelf();
 
@@ -68,6 +95,8 @@ public:
 	void SwapMeshOn25PercentGrowth();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
 	void SwapMeshOn50PercentGrowth();
+	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
+	void SwapMeshOn75PercentGrowth();
 	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable, Category = "growth | mesh | plant")
 	void SwapMeshOnCompletedGrowth();
 	UFUNCTION(BlueprintCallable, Category = "growth | plant")
@@ -83,6 +112,11 @@ public:
 	}
 	bool Is50PercentGrown() {
 		if (currentGrowth >= maxGrowth/2)
+			return true;
+		return false;
+	}
+	bool Is75PercentGrown(){
+		if(currentGrowth >= maxGrowth*0.75)
 			return true;
 		return false;
 	}
@@ -102,7 +136,14 @@ public:
 			}
 			return;
 		case STAGE_50_PERCENT:
-			if(IsFullyGrown()) {
+			if(Is75PercentGrown()) {
+				SwapMeshOn75PercentGrowth();
+				currentStage++;
+			}
+			return;
+		case STAGE_75_PERCENT:
+			if(IsFullyGrown())
+			{
 				SwapMeshOnCompletedGrowth();
 				currentStage++;
 			}
