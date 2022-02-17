@@ -14,6 +14,11 @@ struct PAULSUTILITIES_API FireNodeData {
 	GENERATED_BODY()
 	int32 Fuel;  //unsigned
 	int16 BurnPerTick;  //unsigned
+	int16 Radius;  //unsigned
+	bool depleted() {
+		if (Fuel) return true;
+		return false;
+	}
 };
 
 UCLASS()

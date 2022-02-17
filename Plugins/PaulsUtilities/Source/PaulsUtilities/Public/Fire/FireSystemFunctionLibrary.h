@@ -11,6 +11,8 @@ UCLASS()
 class PAULSUTILITIES_API UFireSystemFunctionLibrary : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 public:
+	UFUNCTION(BlueprintCallable, Category = "PaulsUtilities | system")
+	static void FireSystemInit ();
 	UFUNCTION(BlueprintCallable, Category = "PaulsUtilities | system | create | construct")
 	static void FireActorEnlist (AActor* owner);
 	UFUNCTION(BlueprintCallable, Category = "PaulsUtilities | system | destroy | destruct")

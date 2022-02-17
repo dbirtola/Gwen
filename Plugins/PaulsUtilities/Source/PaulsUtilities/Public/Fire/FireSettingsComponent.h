@@ -12,10 +12,8 @@
 USTRUCT()
 struct PAULSUTILITIES_API FireSettingsData {
 	GENERATED_BODY()
+	uint32 fireSystemID = -1;  //Private: no touchy!
 	bool DestroyOwnerOnCompletion;
-private:
-	uint32 fireSystemID = -1;
-public:
 	FORCEINLINE bool isRegistered() const {
 		if(fireSystemID != -1)
 			return true;
