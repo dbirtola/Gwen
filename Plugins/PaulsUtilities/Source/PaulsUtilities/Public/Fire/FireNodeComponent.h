@@ -16,13 +16,13 @@ struct PAULSUTILITIES_API FireNodeData {
 	int16 BurnPerTick;  //unsigned
 	int16 Radius;  //unsigned
 	bool depleted() {
-		if (Fuel) return true;
+		if (!Fuel) return true;
 		return false;
 	}
 };
 
-UCLASS()
-class PAULSUTILITIES_API UFireNodeComponent : public UActorComponent {
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+class PAULSUTILITIES_API UFireNodeComponent : public USceneComponent {
 	GENERATED_BODY()
 public:
 	FireNodeData NodeData;
